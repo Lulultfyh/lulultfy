@@ -1,44 +1,32 @@
 import tkinter as tk
 import math
 
-# Fungsi untuk menghitung volume limas segitiga
-def hitung():
-    alas = float(entry_alas.get())
-    tinggi_alas = float(entry_tinggi_alas.get())
-    tinggi_limas = float(entry_tinggi_limas.get())
+def hitung_volume():
+    alas = float(alas_entry.get())
+    tinggi = float(tinggi_entry.get())
+    volume = (alas * tinggi) / 3
+    hasil_volume.set(f"Volume Limas Segitiga: {volume:.2f}")
 
-    volume = (1/3) * (1/2 * alas * tinggi_alas) * tinggi_limas
-    hasil_volume.config(text=f"Volume: {volume:.2f} satuan kubik")
+app = tk.Tk()
+app.title("Aplikasi Limas Segitiga")
 
-# Membuat jendela utama
-root = tk.Tk()
-root.title("Kalkulator Limas Segitiga")
+alas_label = tk.Label(app, text="Panjang Alas Segitiga:")
+alas_label.pack()
 
-# Membuat label dan input fields untuk alas, tinggi alas, dan tinggi limas segitiga
-label_alas = tk.Label(root, text="Alas segitiga:")
-label_tinggi_alas = tk.Label(root, text="Tinggi alas:")
-label_tinggi_limas = tk.Label(root, text="Tinggi limas:")
+alas_entry = tk.Entry(app)
+alas_entry.pack()
 
-entry_alas = tk.Entry(root)
-entry_tinggi_alas = tk.Entry(root)
-entry_tinggi_limas = tk.Entry(root)
+tinggi_label = tk.Label(app, text="Tinggi Limas:")
+tinggi_label.pack()
 
-label_alas.grid(row=0, column=0)
-label_tinggi_alas.grid(row=1, column=0)
-label_tinggi_limas.grid(row=2, column=0)
+tinggi_entry = tk.Entry(app)
+tinggi_entry.pack()
 
-entry_alas.grid(row=0, column=1)
-entry_tinggi_alas.grid(row=1, column=1)
-entry_tinggi_limas.grid(row=2, column=1)
+hitung_volume_button = tk.Button(app, text="Hitung Volume", command=hitung_volume)
+hitung_volume_button.pack()
 
-# Tombol untuk menghitung
-hitung_button = tk.Button(root, text="Hitung", command=hitung)
-hitung_button.grid(row=3, columnspan=2)
+hasil_volume = tk.StringVar()
+hasil_volume_label = tk.Label(app, textvariable=hasil_volume)
+hasil_volume_label.pack()
 
-# Hasil perhitungan
-hasil_volume = tk.Label(root, text="")
-
-hasil_volume.grid(row=4, columnspan=2)
-
-# Menjalankan aplikasi
-root.mainloop()
+app.mainloop()

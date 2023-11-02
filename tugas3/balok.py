@@ -1,48 +1,52 @@
 import tkinter as tk
 
-# Fungsi untuk menghitung volume dan luas permukaan balok
-def hitung():
-    panjang = float(entry_panjang.get())
-    lebar = float(entry_lebar.get())
-    tinggi = float(entry_tinggi.get())
-
+def hitung_volume():
+    panjang = float(panjang_entry.get())
+    lebar = float(lebar_entry.get())
+    tinggi = float(tinggi_entry.get())
     volume = panjang * lebar * tinggi
+    hasil_volume.set(f"Volume: {volume:.2f}")
+
+def hitung_luas_permukaan():
+    panjang = float(panjang_entry.get())
+    lebar = float(lebar_entry.get())
+    tinggi = float(tinggi_entry.get())
     luas_permukaan = 2 * (panjang * lebar + panjang * tinggi + lebar * tinggi)
+    hasil_luas_permukaan.set(f"Luas Permukaan: {luas_permukaan:.2f}")
 
-    hasil_volume.config(text=f"Volume: {volume:.2f} satuan kubik")
-    hasil_luas_permukaan.config(text=f"Luas Permukaan: {luas_permukaan:.2f} satuan persegi")
+app = tk.Tk()
+app.title("Aplikasi Balok")
 
-# Membuat jendela utama
-root = tk.Tk()
-root.title("Kalkulator Balok")
+panjang_label = tk.Label(app, text="Panjang:")
+panjang_label.pack()
 
-# Membuat label dan input fields untuk panjang, lebar, dan tinggi balok
-label_panjang = tk.Label(root, text="Panjang:")
-label_lebar = tk.Label(root, text="Lebar:")
-label_tinggi = tk.Label(root, text="Tinggi:")
+panjang_entry = tk.Entry(app)
+panjang_entry.pack()
 
-entry_panjang = tk.Entry(root)
-entry_lebar = tk.Entry(root)
-entry_tinggi = tk.Entry(root)
+lebar_label = tk.Label(app, text="Lebar:")
+lebar_label.pack()
 
-label_panjang.grid(row=0, column=0)
-label_lebar.grid(row=1, column=0)
-label_tinggi.grid(row=2, column=0)
+lebar_entry = tk.Entry(app)
+lebar_entry.pack()
 
-entry_panjang.grid(row=0, column=1)
-entry_lebar.grid(row=1, column=1)
-entry_tinggi.grid(row=2, column=1)
+tinggi_label = tk.Label(app, text="Tinggi:")
+tinggi_label.pack()
 
-# Tombol untuk menghitung
-hitung_button = tk.Button(root, text="Hitung", command=hitung)
-hitung_button.grid(row=3, columnspan=2)
+tinggi_entry = tk.Entry(app)
+tinggi_entry.pack()
 
-# Hasil perhitungan
-hasil_volume = tk.Label(root, text="")
-hasil_luas_permukaan = tk.Label(root, text="")
+hitung_volume_button = tk.Button(app, text="Hitung Volume", command=hitung_volume)
+hitung_volume_button.pack()
 
-hasil_volume.grid(row=4, columnspan=2)
-hasil_luas_permukaan.grid(row=5, columnspan=2)
+hitung_luas_permukaan_button = tk.Button(app, text="Hitung Luas Permukaan", command=hitung_luas_permukaan)
+hitung_luas_permukaan_button.pack()
 
-# Menjalankan aplikasi
-root.mainloop()
+hasil_volume = tk.StringVar()
+hasil_volume_label = tk.Label(app, textvariable=hasil_volume)
+hasil_volume_label.pack()
+
+hasil_luas_permukaan = tk.StringVar()
+hasil_luas_permukaan_label = tk.Label(app, textvariable=hasil_luas_permukaan)
+hasil_luas_permukaan_label.pack()
+
+app.mainloop()
